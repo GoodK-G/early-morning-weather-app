@@ -4,7 +4,7 @@ var WeatherContainer= docurment.querySelector('#weather')
 var formSubmitHandler = function (event) {
     event.preventDefault();
   
-    var city = city.value.trim();
+    var city = CityName.value.trim();
   
     if (city) {
       getUserRepos(city);
@@ -17,7 +17,7 @@ var formSubmitHandler = function (event) {
   };
 
   var get5Day = function (data){
-    var apiURL5day = 'api.openweathermap.org/data/2.5/forecast?lat='+data.lat + '&lon='+data.lon+'&appid='+ APIKey;
+    var apiURL5day = 'http://api.openweathermap.org/data/2.5/forecast?lat='+data.lat + '&lon='+data.lon+'&appid='+ APIKey;
     fetch(apiURL5day)
     .then(function(response){
         if (response.ok){
