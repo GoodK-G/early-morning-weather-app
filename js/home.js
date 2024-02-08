@@ -1,13 +1,13 @@
 var APIKey = '08214ae72c1f4e9a7c2e2c0daf0568ff' ;
 var CityName= document.querySelector('#city');
-var WeatherContainer= docurment.querySelector('#weather')
+var WeatherContainer= document.querySelector('#weather')
 var formSubmitHandler = function (event) {
     event.preventDefault();
   
     var city = CityName.value.trim();
   
     if (city) {
-      getUserRepos(city);
+      getWeather(city);
   
       WeatherContainer.textContent = '';
       city.value = '';
