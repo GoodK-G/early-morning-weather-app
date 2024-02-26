@@ -26,3 +26,18 @@ h1 {
     width: calc(20% - 20px); 
     box-sizing: border-box; 
 }
+
+#previous-searches {
+    margin-top: 20px;
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+#previous-searches li {
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+}

@@ -112,6 +112,22 @@ function saveSearch(city) {
 
   // Save the updated array to local storage
   localStorage.setItem('weatherSearches', JSON.stringify(last5Searches));
+
+  // Update the previous searches list in the HTML
+  updatePreviousSearches(last5Searches);
+}
+function updatePreviousSearches(searches) {
+  const previousSearchesList = document.getElementById('previous-searches');
+
+  // Clear previous searches
+  previousSearchesList.innerHTML = '';
+
+  // Add each search as a list item
+  searches.forEach(search => {
+      const listItem = document.createElement('li');
+      listItem.textContent = search;
+      previousSearchesList.appendChild(listItem);
+  });
 }
 
 function loadPreviousSearches() {
