@@ -127,6 +127,13 @@ function updatePreviousSearches(searches) {
       const listItem = document.createElement('li');
       listItem.textContent = search;
       previousSearchesList.appendChild(listItem);
+
+      // Add an event listener to each list item to fetch weather when clicked
+       listItem.addEventListener('click', () => {
+        // Set the city input value to the clicked search and trigger a new search
+        document.getElementById('cityInput').value = search;
+        fetchWeather();
+      });
   });
 }
 
