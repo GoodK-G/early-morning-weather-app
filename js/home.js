@@ -33,6 +33,9 @@ async function fetchWeather() {
 
           // Handle the fetched data and populate the HTML
           populateWeatherCards(weatherData);
+
+          // Save the search to local storage
+          saveSearch(city);
       } else {
           console.error('Geocoding error: City not found');
       }
@@ -97,3 +100,24 @@ function groupByDay(forecastList) {
   return result;
 }
 
+function saveSearch(city) {
+  // Load previous searches from local storage
+  const previousSearches = loadPreviousSearches();
+
+  // Add the current search to the array
+  previousSearches.unshift(city);
+
+  // Keep only the last 5 searches
+  const last5Searches = previousSearches.slice(0, 5);
+
+  // Save the updated array to local storage
+  localStorage.setItem('weatherSearches', JSON.stringify(last5Searches));
+}
+
+function loadPreviousSearches() {
+  // Retrieve previous searches from local storage
+  const previousSearchesJSON = localStorage.getItem('weatherSearches');
+
+  // Parse the JSON data or initialize an empty array if there are no previous searches
+  return JSON.parse(previousSearchesJSON) || [];
+}
