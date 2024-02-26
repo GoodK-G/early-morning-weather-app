@@ -41,3 +41,59 @@ async function fetchWeather() {
   }
 }
 
+function populateWeatherCards(data) {
+  const forecastContainer = document.getElementById('forecast-container');
+  forecastContainer.innerHTML = ''; // Clear previous forecast data
+
+  // Group forecast data by day
+  const groupedByDay = groupByDay(data.list);
+  console.log(groupedByDay);
+
+  // Loop through the grouped data and create one card per day
+  for (const dayData of groupedByDay) {
+      // Extract relevant information for the day
+      const date = new Date(dayData[0].dt * 1000);
+      const temperature = dayData[0].main.temp;
+      const description = dayData[0].weather[0].description;
+      const card = document.createElement('div');
+      const icon = `<img src="http://openweathermap.org/img/wn/${dayData[0].weather[0].icon}.png" alt="${description}">`;
+
+      // Create the HTML content for each card
+      card.innerHTML = `
+          <h2>${date.toLocaleDateString()}</h2>
+          <p>${icon}<p>
+          <p>Temperature: ${temperature}°C</p>
+          <p>Description: ${description}</p>
+      `;
+
+      // Append the card to the forecast container
+      forecastContainer.appendChild(card);
+  }
+}
+
+//I have added the following function to group the forecast data by day
+
+function groupByDay(forecastList) {
+  // Create an object to store forecast data grouped by day
+  const groupedData = {};
+
+  // Loop through the forecast data
+  for (const forecast of forecastList) {
+      // Extract the date without the time component
+      const date = new Date(forecast.dt * 1000).toLocaleDateString();
+
+      // If the date is not in the grouped data, create an array for that date
+      if (!groupedData[date]) {
+          groupedData[date] = [];
+      }
+
+      // Add the forecast data to the corresponding date
+      groupedData[date].push(forecast);
+  }
+
+  // Convert the object values to an array
+  const result = Object.values(groupedData);
+
+  return result;
+}
+
